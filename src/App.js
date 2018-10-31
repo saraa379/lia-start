@@ -1,28 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Menu from './components/Menu.js';
 import './App.css';
+import {connect} from 'react-redux';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+      <div className="AppWrap">
+        <header>
+            <Menu></Menu>
         </header>
+
+        <main className="main">
+        <div id="HomeWrap" className={(this.props.currentTab==="Home") ? "visible" : "notVisible"}>
+            Home page
+        </div>
+        <div id="ContactWrap" className={(this.props.currentTab==="Contact") ? "visible" : "notVisible"}>
+            Contact page
+        </div>
+
+        </main>
+
+        <footer>
+              <p>paragraph</p>
+              <p>paragraph</p>
+        </footer>
       </div>
     );
   }
 }
 
-export default App;
+let mapStateToProps = state => {
+	return {
+		currentTab: state.currentTab
+	};
+}
+
+export default connect(mapStateToProps)(App);
